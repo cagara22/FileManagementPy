@@ -1,0 +1,34 @@
+2024-10-17 08:26:20 - INFO - Script Started!
+2024-10-17 08:29:13 - INFO - Script Started!
+2024-10-17 08:29:24 - INFO - OrganizeScript is Selected.
+2024-10-17 08:29:56 - INFO - Do you want to proceed? [N]o
+2024-10-17 08:30:01 - INFO - Exiting Script!
+2024-10-17 09:02:09 - INFO - Do you want to proceed? [Y]es
+2024-10-17 09:02:09 - INFO - Current source directory: C:\Users\Vincent Felix Cagara\PycharmProjects
+2024-10-17 09:02:09 - INFO - Current destination directory: C:\Users\Vincent Felix Cagara\PycharmProjects
+2024-10-17 09:02:49 - INFO - Current source directory: C:\Users\Vincent Felix Cagara\Desktop\test_folder
+2024-10-17 09:03:16 - INFO - Current destination directory: C:\Users\Vincent Felix Cagara\Desktop\test_folder
+2024-10-17 09:03:26 - INFO - Total number of files: 5
+2024-10-17 09:03:26 - INFO - {'Documents': 3, 'Images': 2, 'Videos': 0, 'Audio': 0, 'Archives': 0, 'Code': 0, 'Executables': 0, 'Others': 0}
+2024-10-17 09:04:04 - INFO - Do you want to proceed with the operation? [Y]es
+2024-10-17 09:04:04 - INFO - Folder already exists: Documents
+2024-10-17 09:04:04 - INFO - Folder already exists: Images
+2024-10-17 09:04:04 - INFO - Folder already exists: Videos
+2024-10-17 09:04:04 - INFO - Folder already exists: Audio
+2024-10-17 09:04:04 - INFO - Folder already exists: Archives
+2024-10-17 09:04:04 - INFO - Folder already exists: Code
+2024-10-17 09:04:04 - INFO - Folder already exists: Executables
+2024-10-17 09:04:04 - INFO - Folder already exists: Others
+2024-10-17 09:04:04 - INFO - Moving Files from C:\Users\Vincent Felix Cagara\Desktop\test_folder to C:\Users\Vincent Felix Cagara\Desktop\test_folder
+2024-10-17 09:04:04 - WARNING - test_doc1.txt already exists on C:\Users\Vincent Felix Cagara\Desktop\test_folder\Documents
+2024-10-17 09:04:38 - INFO - test_doc1.txt has be renamed to test_doc4.txt
+2024-10-17 09:04:38 - INFO - Moving test_doc4.txt to C:\Users\Vincent Felix Cagara\Desktop\test_folder\Documents
+2024-10-17 09:04:38 - INFO - Moving test_doc2.txt to C:\Users\Vincent Felix Cagara\Desktop\test_folder\Documents
+2024-10-17 09:04:38 - INFO - Moving test_doc3.txt to C:\Users\Vincent Felix Cagara\Desktop\test_folder\Documents
+2024-10-17 09:04:38 - INFO - Moving test_pic1.jpg to C:\Users\Vincent Felix Cagara\Desktop\test_folder\Images
+2024-10-17 09:04:38 - INFO - Moving test_pic2.jpg to C:\Users\Vincent Felix Cagara\Desktop\test_folder\Images
+2024-10-17 09:04:46 - INFO - Total number of files: 0
+2024-10-17 09:04:46 - INFO - {'Documents': 0, 'Images': 0, 'Videos': 0, 'Audio': 0, 'Archives': 0, 'Code': 0, 'Executables': 0, 'Others': 0}
+2024-10-17 09:04:54 - INFO - Exiting OrganizeScript!
+2024-10-17 09:04:54 - INFO - Script Started!
+2024-10-17 09:05:03 - INFO - Exiting Script!
