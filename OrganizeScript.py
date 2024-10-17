@@ -13,72 +13,11 @@ logging.basicConfig(
     datefmt="%Y-%m-%d %H:%M:%S"
 )
 
-# Dictionary of the file to be organized
-file_type_ext = {
-    "Documents": [".txt", ".pdf", ".docx", ".doc", ".xls", ".xlsx", ".ppt", ".pptx"],
-    "Images": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".svg"],
-    "Videos": [".mp4", ".avi", ".mov", ".mkv", ".flv", ".wmv"],
-    "Audio": [".mp3", ".wav", ".aac", ".flac", ".ogg", ".wma"],
-    "Archives": [".zip", ".rar", ".tar", ".gz", ".7z"],
-    "Code": [".py", ".java", ".cpp", ".c", ".js", ".html", ".css", ".php"],
-    "Executables": [".exe", ".bat", ".sh", ".bin"]
-}
-
-
-# It counts the number of files in the source directory
-def count_total_file(directory):
-    files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
-    no_of_files = len(files)
-    logging.info("Total number of files: {}".format(no_of_files))
-    return no_of_files
-
-
-# It counts the different file types on the source directory based on the dictionary
-def count_file_type(directory):
-    files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]  # Gets the list of files
-    file_type_count = {}  # Stores the count
-
-    # Creates an item pair in the dictionary for the count per filetype
-    for category in file_type_ext.keys():
-        file_type_count[category] = 0
-    file_type_count["Others"] = 0
-
-    # Counts the filetype
-    for file in files:
-        found = False
-        pattern = r"\.\w+$"
-        ext = re.search(pattern, file)  # Gets the file extension
-
-        # Determine what filetype it belongs then increment the counter for the said filetype
-        for category, extensions in file_type_ext.items():
-            if ext[0] in extensions:
-                file_type_count[category] += 1
-                found = True
-                break
-
-        # If the filetype was not found in the dictionary then it belongs in Others
-        if not found:
-            file_type_count["Others"] += 1
-
-    logging.info(file_type_count)
-    return file_type_count
-
-
-# Prints the filetype count summary
-def print_summary(directory):
-    border_line = "|-------------------------------------------|"
-    total_no_files = count_total_file(directory)
-    print(border_line)
-    print("Total number of files: {}".format(total_no_files))
-    for category, count in count_file_type(directory).items():
-        print("{:>15}: {}".format(category, count))
-    print(border_line)
-
 
 # Creates the folder where the files will be organized
-def create_dir(directory):
+def create_dir(directory: str):
     print("!---Creating Folders for each category at {}---!".format(directory))
-    folder_list = list(file_type_ext.keys())  # Generate a list of folder names based on the filetype dictionary keys
+    folder_list = list(GeneralFunction.file_type_ext.keys())  # Generate a list of folder names based on the filetype dictionary keys
     folder_list.append("Others")
 
     # Creates the folder based on the list
@@ -96,13 +35,13 @@ def create_dir(directory):
 
 
 # Checks the free space of the destination directory
-def get_free_space(directory):
+def get_free_space(directory: str):
     usage = shutil.disk_usage(directory)
     return usage.free
 
 
 # Sanitize the filename from invalid characters
-def make_valid_file_name(file_name):
+def make_valid_file_name(file_name: str):
     invalid_chars = '<>:"/\\|?*'
 
     # Replace all invalid characters with '_'
@@ -120,7 +59,7 @@ def make_valid_file_name(file_name):
 
 
 # Rename a file
-def rename_file(dest_folder, extn):
+def rename_file(dest_folder: str, extn: str):
     while True:
         new_file_name = input("Input new file name (exclude file extension):")
         new_file_name = "{}{}".format(make_valid_file_name(new_file_name), extn)
@@ -132,7 +71,7 @@ def rename_file(dest_folder, extn):
 
 
 # Moves the files to its respective folders
-def move_files(source_dir, destination_dir):
+def move_files(source_dir: str, destination_dir: str):
     print("!---Moving Files from {} to {}---!".format(source_dir, destination_dir))
     logging.info("Moving Files from {} to {}".format(source_dir, destination_dir))
     files = [f for f in os.listdir(source_dir) if os.path.isfile(os.path.join(source_dir, f))]  # File list
@@ -146,7 +85,7 @@ def move_files(source_dir, destination_dir):
         ext = re.search(pattern, file)  # File extension
 
         # Determine what category it belongs
-        for category, extensions in file_type_ext.items():
+        for category, extensions in GeneralFunction.file_type_ext.items():
             if ext[0] in extensions:
                 destination_folder = os.path.join(destination_dir, category)  # Determine the folder
                 found = True
@@ -202,6 +141,7 @@ def move_files(source_dir, destination_dir):
 
 
 def organize_script():
+    logging.info("Starting OrganizeScript!")
     print("This is a script for organizing files. It automatically organize all files in a chosen directory.")
     dialog1 = "Do you want to proceed?"
     if GeneralFunction.confirm_dialog(dialog1):
@@ -250,7 +190,7 @@ def organize_script():
             elif opt1 == option_list1[2]:
 
                 # Prints the directory summary
-                print_summary(source_directory)
+                GeneralFunction.print_summary(source_directory)
 
             elif opt1 == option_list1[3]:
 
@@ -273,4 +213,5 @@ def organize_script():
                 print("!------INVALID OPTION------!")
 
 
-organize_script()
+if __name__ == "__main__":
+    organize_script()
