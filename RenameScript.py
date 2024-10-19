@@ -92,6 +92,79 @@ def manual_renaming(directory: str):
     print("!---------------------------DONE---------------------------!")
 
 
+def auto_renaming(directory: str):
+    # Naming Sequence guide
+    print("Create a Naming Sequence:")
+    print("<ft> - Filetype")
+    print("<inc> - Increment")
+    print("<fn> - Filename")
+    print("Example: 'sample.txt' -> [test_<ft>_<fn>_<inc>] = test_doc_sample_1.txt")
+    logging.info("Creating Naming Sequence...")
+    name_seq = input("Enter Naming Sequence: ")
+
+    # Check if Increment is present, if not, add it
+    if "<inc>" not in name_seq:
+        logging.info("Increment not found! Adding Increment to Naming Sequence.")
+        print("Increment not found! Adding Increment to Naming Sequence.")
+        name_seq = f"{name_seq}_<inc>"
+
+    logging.info(f"Naming Sequence: {name_seq}")
+
+    file_type_count = {}
+    # Creates an item pair in the dictionary for the count per filetype
+    for category in GeneralFunction.file_type_ext.keys():
+        file_type_count[category] = 0
+    file_type_count["Others"] = 0
+
+    files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
+    exempted_files = []
+    for file in files:
+        if file not in exempted_files:
+            pattern = r"(\w+)(\.\w+)"
+            file_group = re.search(pattern, file)
+            file_name = file_group.group(1)
+            file_ext = file_group.group(2)
+            file_type = ""
+            file_inc = 0
+
+            while True:
+                new_file_name = name_seq
+                # Determine what filetype it belongs then increment the counter for the said filetype
+                found = False
+                for category, extensions in GeneralFunction.file_type_ext.items():
+                    if file_ext in extensions:
+                        file_type_count[category] += 1
+                        file_type = category[:3].lower()
+                        file_inc = file_type_count[category]
+                        found = True
+                        break
+
+                # If the filetype was not found in the dictionary then it belongs in Others
+                if not found:
+                    file_type_count["Others"] += 1
+                    file_type = "oth"
+                    file_inc = file_type_count["Others"]
+
+                new_file_name = new_file_name.replace("<ft>", file_type)
+                new_file_name = new_file_name.replace("<fn>", file_name)
+                new_file_name = new_file_name.replace("<inc>", str(file_inc))
+                new_file = f"{make_valid_file_name(new_file_name)}{file_ext}"
+
+                print(f"Renaming {file} to {new_file}...")
+                logging.info(f"Renaming {file} to {new_file}...")
+                if os.path.exists(os.path.join(directory, new_file)):
+                    exempted_files.append(new_file)
+                    print(f"{new_file} already exist! Renaming again...")
+                    logging.info(f"{new_file} already exist! Renaming again...")
+                else:
+                    os.rename(os.path.join(directory, file), os.path.join(directory, new_file))
+                    print("Renaming Complete!")
+                    logging.info("Renaming Complete!")
+                    break
+
+    print("!---------------------------DONE---------------------------!")
+
+
 def rename_script():
     logging.info("Starting RenameScript!")
     print("This is a script for Renaming files. It automatically renames all files in a chosen directory.")
@@ -140,7 +213,12 @@ def rename_script():
 
             elif opt1 == option_list1[3]:
 
-                print("Auto Renaming!")
+                dialog3 = "Do you want to proceed Auto Renaming?"
+                if GeneralFunction.confirm_dialog(dialog3):
+                    print("Starting Auto Renaming!")
+                    logging.info("Starting Auto Renaming!")
+                    auto_renaming(target_directory)
+                    logging.info("Exiting Auto Renaming!")
 
             elif opt1 == option_list1[4]:
 

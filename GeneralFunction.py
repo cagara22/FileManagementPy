@@ -14,7 +14,7 @@ logging.basicConfig(
 # Dictionary of the file types
 file_type_ext = {
     "Documents": [".txt", ".pdf", ".docx", ".doc", ".xls", ".xlsx", ".ppt", ".pptx"],
-    "Images": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".svg"],
+    "Pictures": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".svg"],
     "Videos": [".mp4", ".avi", ".mov", ".mkv", ".flv", ".wmv"],
     "Audio": [".mp3", ".wav", ".aac", ".flac", ".ogg", ".wma"],
     "Archives": [".zip", ".rar", ".tar", ".gz", ".7z"],
