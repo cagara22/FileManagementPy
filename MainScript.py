@@ -2,6 +2,7 @@ import logging
 import GeneralFunction
 from OrganizeScript import organize_script
 from RenameScript import rename_script
+from SearchScript import search_script
 
 # Configure logging
 log_filename = "file_management.log"
@@ -27,7 +28,8 @@ while opt != option_list[3]:
         logging.info("RenamingScript is Selected.")
         rename_script()
     elif opt == option_list[2]:
-        print("Under development!")
+        logging.info("SearchScript is Selected.")
+        search_script()
     elif opt == option_list[3]:
         logging.info("Exiting Script!")
         print("Exiting Script!")

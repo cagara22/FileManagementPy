@@ -22,11 +22,12 @@ def deep_count_total_content(directory: str, content_count: dict):
             ext = re.search(pattern, data)  # Gets the file extension
 
             # Determine what filetype it belongs then increment the counter for the said filetype
-            for category, extensions in GeneralFunction.file_type_ext.items():
-                if ext[0] in extensions:
-                    content_count[category] += 1
-                    found = True
-                    break
+            if ext is not None:
+                for category, extensions in GeneralFunction.file_type_ext.items():
+                    if ext[0] in extensions:
+                        content_count[category] += 1
+                        found = True
+                        break
 
             # If the filetype was not found in the dictionary then it belongs in Others
             if not found:
@@ -62,6 +63,17 @@ def deep_list_content(directory: str, total: int = 0):
             print(os.path.join(directory, data))
             total = deep_list_content(os.path.join(directory, data), total)
     return total
+
+
+def deep_search(directory: str, found: list, search_term: str):
+    if len(search_term) != 0:
+        data_list = [f for f in os.listdir(directory)]
+        for data in data_list:
+            if search_term.lower() in data.lower():
+                found.append(os.path.join(directory, data))
+
+            if not os.path.isfile(os.path.join(directory, data)):
+                deep_search(os.path.join(directory, data), found, search_term)
 
 
 def search_script():
@@ -119,6 +131,15 @@ def search_script():
             elif opt1 == option_list1[3]:
 
                 print("Search File")
+                found_list = []
+                search_text = input("Enter search text: ")
+                logging.info(f"Search term: [{search_text}]")
+                deep_search(target_directory, found_list, search_text)
+                logging.info(f"Number of Content Match: {len(found_list)}")
+                print(f"Number of Content Match: {len(found_list)}")
+                for file in found_list:
+                    logging.info(file)
+                    print(file)
 
             elif opt1 == option_list1[4]:
 
