@@ -92,11 +92,12 @@ def count_file_type(directory: str):
         ext = re.search(pattern, file)  # Gets the file extension
 
         # Determine what filetype it belongs then increment the counter for the said filetype
-        for category, extensions in file_type_ext.items():
-            if ext[0] in extensions:
-                file_type_count[category] += 1
-                found = True
-                break
+        if ext is not None:
+            for category, extensions in file_type_ext.items():
+                if ext[0] in extensions:
+                    file_type_count[category] += 1
+                    found = True
+                    break
 
         # If the filetype was not found in the dictionary then it belongs in Others
         if not found:

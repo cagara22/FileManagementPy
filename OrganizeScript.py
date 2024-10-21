@@ -82,11 +82,12 @@ def move_files(source_dir: str, destination_dir: str):
         source_file = os.path.join(source_dir, file)  # File's filepath
         found = False
         pattern = r"\.\w+$"
-        ext = re.search(pattern, file)  # File extension
+        ext = re.search(pattern, file)
+        extn = ext[0] if ext is not None else ""  # File extension
 
         # Determine what category it belongs
         for category, extensions in GeneralFunction.file_type_ext.items():
-            if ext[0] in extensions:
+            if extn in extensions:
                 destination_folder = os.path.join(destination_dir, category)  # Determine the folder
                 found = True
                 break
@@ -120,7 +121,7 @@ def move_files(source_dir: str, destination_dir: str):
                 elif opt2 == options_list2[1]:
                     # Rename the incoming file
                     prev_file = file
-                    file = rename_file(destination_folder, ext[0])
+                    file = rename_file(destination_folder, extn)
                     print("{} has be renamed to {}".format(prev_file, file))
                     logging.info("{} has be renamed to {}".format(prev_file, file))
                 elif opt2 == options_list2[2]:

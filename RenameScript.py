@@ -47,7 +47,7 @@ def manual_renaming(directory: str):
             logging.info(f"Renaming {file}...")
             pattern = r"(\w+)(\.\w+)"
             file_group = re.search(pattern, file)
-            file_ext = file_group.group(2)
+            file_ext = file_group.group(2) if file_group else ""
 
             # Rename the files one by one
             while True:
@@ -122,8 +122,8 @@ def auto_renaming(directory: str):
         if file not in exempted_files:
             pattern = r"(\w+)(\.\w+)"
             file_group = re.search(pattern, file)
-            file_name = file_group.group(1)
-            file_ext = file_group.group(2)
+            file_name = file_group.group(1) if file_group else file
+            file_ext = file_group.group(2) if file_group else ""
             file_type = ""
             file_inc = 0
 
