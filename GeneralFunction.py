@@ -18,8 +18,8 @@ file_type_ext = {
     "Videos": [".mp4", ".avi", ".mov", ".mkv", ".flv", ".wmv"],
     "Audio": [".mp3", ".wav", ".aac", ".flac", ".ogg", ".wma"],
     "Archives": [".zip", ".rar", ".tar", ".gz", ".7z"],
-    "Code": [".py", ".java", ".cpp", ".c", ".js", ".html", ".css", ".php"],
-    "Executables": [".exe", ".bat", ".sh", ".bin"]
+    "Code": [".py", ".java", ".cpp", ".c", ".js", ".html", ".css", ".php", ".ino"],
+    "Executables": [".exe", ".bat", ".sh", ".bin", ".msi"]
 }
 
 
